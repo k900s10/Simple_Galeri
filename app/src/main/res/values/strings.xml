@@ -3,4 +3,28 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string-array name="namaArtist">
+        <item>Adit</item>
+        <item>Sopo</item>
+        <item>Jarwo</item>
+        <item>Mega</item>
+        <item>Wati</item>
+        <item>Mulyono</item>
+        <item>Sapudin</item>
+        <item>Udin</item>
+        <item>Yoga</item>
+    </string-array>
+
+    <string-array name="namaLagu">
+        <item>Drakor</item>
+        <item>Mulayu</item>
+        <item>Ajudan plakor</item>
+        <item>Doremi</item>
+        <item>Sangkerta ft.Kerta</item>
+        <item>mageran</item>
+        <item>molor</item>
+        <item>tidur sajalah</item>
+        <item>Kspwwwww</item>
+    </string-array>
 </resources>
