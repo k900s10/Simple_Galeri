@@ -37,7 +37,6 @@ public class BillboardAdapter extends RecyclerView.Adapter<BillboardAdapter.View
         holder.mRank.setText(billboard.getRank());
         holder.mTitle.setText(billboard.getTitle());
         holder.mArtist.setText(billboard.getArtist());
-        holder.mDetail.setText(billboard.getDetail());
     }
 
     @Override
@@ -47,7 +46,7 @@ public class BillboardAdapter extends RecyclerView.Adapter<BillboardAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView mRank, mTitle, mArtist, mDetail;
+        TextView mRank, mTitle, mArtist;
         BillboardAdapter billboardAdapter;
 
         public ViewHolder(@NonNull View itemView, BillboardAdapter billboardAdapter) {
@@ -56,7 +55,6 @@ public class BillboardAdapter extends RecyclerView.Adapter<BillboardAdapter.View
             this.mRank = itemView.findViewById(R.id.lRank);
             this.mTitle = itemView.findViewById(R.id.lTitle);
             this.mArtist = itemView.findViewById(R.id.lArtist);
-            this.mDetail = itemView.findViewById(R.id.lDetail);
             this.billboardAdapter = billboardAdapter;
         }
     }

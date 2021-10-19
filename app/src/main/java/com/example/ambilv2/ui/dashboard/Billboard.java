@@ -4,7 +4,6 @@ public class Billboard {
     private String rank;
     private String title;
     private String artist;
-    private String detail;
 
     public String getRank() {
         return rank;
@@ -30,11 +29,4 @@ public class Billboard {
         this.artist = artist;
     }
 
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
 }

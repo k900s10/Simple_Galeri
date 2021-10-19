@@ -6,41 +6,42 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/lRank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="1"
+            android:textSize="21sp"
+            android:layout_centerVertical="true"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/lRank"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
-            android:textStyle="bold"
-            android:textSize="16dp"/>
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@id/lRank"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Little Box"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lArtist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/lTitle"
-            android:layout_toRightOf="@id/lRank"/>
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@id/lRank"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Randy Orton" />
 
-        <TextView
-            android:id="@+id/lDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/lArtist"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,43 +21,25 @@ import com.android.volley.toolbox.Volley;
 import com.example.ambilv2.R;
 import com.example.ambilv2.databinding.FragmentDashboardBinding;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DashboardFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
     private FragmentDashboardBinding binding;
 
-//    private RecyclerView mRecyclerView;
-//    private ArrayList<DataList> aDataList;
-//    private DataAdapter mDataAdapter;
-
-    private RecyclerView.Adapter adapter;
+    private BillboardAdapter adapter;
     private List<Billboard> billboardList;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
-
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-//        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-            }
-        });
-        return root;
+        return binding.getRoot();
     }
 
     @Override
@@ -77,6 +57,7 @@ public class DashboardFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setAdapter(adapter);
+
         setDataBillboard();
 
     }
@@ -87,72 +68,61 @@ public class DashboardFragment extends Fragment {
         binding = null;
     }
 
-//    private void setData() {
-//        String[] namaArtist = getResources()
-//                .getStringArray(R.array.namaArtist);
-//        String[] namaLagu = getResources()
-//                .getStringArray(R.array.namaLagu);
-//        int image = getResources().getIdentifier("@drawable/profil_picture", null, getActivity().getPackageName());
-//        aDataList.clear();
-//
-//        for (int i = 0; i < namaArtist.length; i++) {
-//            aDataList.add(new DataList(namaLagu[i], namaArtist[i], image));
-//        }
-//        mDataAdapter.notifyDataSetChanged();
-////    }
 
     private void setDataBillboard() {
-        final String url = "https://billboard-api2.p.rapidapi.com/hot-100?range=1-10&date=2019-05-11";
+        final String url = "https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=c000f3d64ff5fc28122f4892e2e36762&format=json";
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
-//                    String data = "";
                     try {
-                        JSONObject objectContent = response.getJSONObject("content");
-////                        JSONArray jsonArray = response.getJSONArray("results");
-                        for (int i = 1; i <= objectContent.length(); i++) {
-                            JSONObject jsonObject = objectContent.getJSONObject(String.valueOf(i));
+                        JSONObject firstGateOfObjectCotent = response.getJSONObject("tracks");
+                        JSONArray secondGateOfObjectCotent = firstGateOfObjectCotent.getJSONArray("track");
+                        for (int i = 0; i <= secondGateOfObjectCotent.length(); i++) {
+                            JSONObject contentOfJsonObject = secondGateOfObjectCotent.getJSONObject(i);
 
-                            String mRank = jsonObject.getString("rank");
-                            String mTitle = jsonObject.getString("title");
-                            String mArtist = jsonObject.getString("artist");
-                            String mDetail = jsonObject.getString("detail");
+                            String mRank = String.valueOf(i + 1);
+                            String mTitle = contentOfJsonObject.getString("name");
 
-                            Log.i("PantekkunIki", "getDataBillboard: " + mRank + " " + mTitle + " " + mArtist + " " + mDetail);
+                            //Declare and inialize code
+//                            JSONObject artistJSONObject = contentOfJsonObject.getJSONObject("artist");
+//                            String mArtist = artistJSONObject.getString("name");
+                            //simpler code
+                            String mArtist = contentOfJsonObject.getJSONObject("artist").getString("name");
 
                             Billboard billboard = new Billboard();
                             billboard.setRank(mRank);
                             billboard.setTitle(mTitle);
                             billboard.setArtist(mArtist);
-                            billboard.setDetail(mDetail);
 
                             billboardList.add(billboard);
+                            adapter.notifyItemInserted(i);
                         }
-                    } catch (JSONException e) {
+                    }
+                    catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    adapter.notifyDataSetChanged();
                     progressDialog.dismiss();
                 }, error -> {
             error.printStackTrace();
             Log.e("VolleyRequest", error.toString());
             progressDialog.dismiss();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("x-rapidapi-host", "billboard-api2.p.rapidapi.com");
-                params.put("x-rapidapi-key", "9311da88c8msh4f147985b871b84p1024a4jsndbc5f1ad194d");
-
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        });
+        //kenang-kenangan dari API lama.
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("x-rapidapi-host", "billboard-api2.p.rapidapi.com");
+//                params.put("x-rapidapi-key", "9311da88c8msh4f147985b871b84p1024a4jsndbc5f1ad194d");
+//
+//                return params;
+//            }
+//        };
+//        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        RequestQueue requestQueue = Volley.newRequestQueue(requireActivity());
         requestQueue.add(jsonObjectRequest);
-
-
     }
 }
