@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void searchLyric(View view) {
 
-
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="https://api.lyrics.ovh/v1/coldplay/yellow";
