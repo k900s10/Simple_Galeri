@@ -1,6 +1,5 @@
 package com.example.ambilv2.ui.dashboard;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -71,57 +70,40 @@ public class DashboardFragment extends Fragment {
 
     private void setDataBillboard() {
         final String url = "https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=c000f3d64ff5fc28122f4892e2e36762&format=json";
-        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
+                        //opening doors
                         JSONObject firstGateOfObjectCotent = response.getJSONObject("tracks");
                         JSONArray secondGateOfObjectCotent = firstGateOfObjectCotent.getJSONArray("track");
+
+                        //getting data
                         for (int i = 0; i <= secondGateOfObjectCotent.length(); i++) {
                             JSONObject contentOfJsonObject = secondGateOfObjectCotent.getJSONObject(i);
 
                             String mRank = String.valueOf(i + 1);
                             String mTitle = contentOfJsonObject.getString("name");
-
-                            //Declare and inialize code
-//                            JSONObject artistJSONObject = contentOfJsonObject.getJSONObject("artist");
-//                            String mArtist = artistJSONObject.getString("name");
-                            //simpler code
                             String mArtist = contentOfJsonObject.getJSONObject("artist").getString("name");
 
+                            //inserting data
                             Billboard billboard = new Billboard();
                             billboard.setRank(mRank);
                             billboard.setTitle(mTitle);
                             billboard.setArtist(mArtist);
 
                             billboardList.add(billboard);
-                            adapter.notifyItemInserted(i);
+                            adapter.notifyDataSetChanged();
                         }
                     }
                     catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    progressDialog.dismiss();
                 }, error -> {
             error.printStackTrace();
             Log.e("VolleyRequest", error.toString());
-            progressDialog.dismiss();
         });
-        //kenang-kenangan dari API lama.
-//        }) {
-//            @Override
-//            public Map<String, String> getHeaders() {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("x-rapidapi-host", "billboard-api2.p.rapidapi.com");
-//                params.put("x-rapidapi-key", "9311da88c8msh4f147985b871b84p1024a4jsndbc5f1ad194d");
-//
-//                return params;
-//            }
-//        };
-//        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
         RequestQueue requestQueue = Volley.newRequestQueue(requireActivity());
         requestQueue.add(jsonObjectRequest);
     }
