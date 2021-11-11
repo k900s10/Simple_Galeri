@@ -45,7 +45,7 @@ public class BillboardAdapter extends RecyclerView.Adapter<BillboardAdapter.View
         return (billboardList != null) ? billboardList.size() : 0;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
         TextView mRank, mTitle, mArtist;
         BillboardAdapter billboardAdapter;
 
