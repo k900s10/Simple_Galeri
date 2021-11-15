@@ -1,5 +1,6 @@
 package com.example.ambilv2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private EditText mArtistName;
     private EditText mSongTitle;
+    public static final String keyArtist = "keyArtist";
+    public static final String keyTitle = "keyTitle";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         textView = findViewById(R.id.hasilPencarian);
+
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 //        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url,null,
 //                new Response.Listener<JSONObject>() {
 //                    @Override
-//                    public void onResponse(JSONObject response) {
+//                    public void onResponse(JSONOAbject response) {
 //
 //                        // Display the first 500 characters of the response string.
 //

@@ -1,5 +1,6 @@
 package com.example.ambilv2.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ambilv2.R;
+import com.example.ambilv2.SearchLyricOutput;
 import com.example.ambilv2.databinding.FragmentHomeBinding;
 
 import org.json.JSONException;
@@ -34,6 +36,8 @@ public class HomeFragment extends Fragment {
     EditText mArtistName;
     EditText mSongTitle;
     TextView textView;
+    private String keyArtist = "keyArtist";
+    private String keyTitle = "keyTitle";
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -42,40 +46,56 @@ public class HomeFragment extends Fragment {
         mArtistName = view.findViewById(R.id.artis_name);
         mSongTitle = view.findViewById(R.id.song_title_label);
         textView = view.findViewById(R.id.hasilPencarian);
-        searchLirik.setOnClickListener(v->nyariLirik());
+        searchLirik.setOnClickListener(v->mencariLirik());
     }
 
-    public void nyariLirik (){
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
-        String url ="https://api.lyrics.ovh/v1/" + mArtistName.getText().toString() + "/" + mSongTitle.getText().toString();
+    private void mencariLirik (){
 
-        // Request a string response from the provided URL.
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url,null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
+        String artis = mArtistName.getText().toString();
+        String title = mSongTitle.getText().toString();
+        if (artis.matches("") || title.matches("")) {
+            return;
+        } else {
+            Intent intent = new Intent(getActivity(), SearchLyricOutput.class);
+            intent.putExtra(keyArtist, artis);
+            intent.putExtra(keyTitle, title);
+            startActivity(intent);
+        }
 
-                        // Display the first 500 characters of the response string.
 
-                        try {
-                            //JSONObject jsonobject = response.getJSONObject("lyrics");
-                            // Log.i("TAG", "onResponse: "+ jsonobject);
-                            textView.setText(response.getString("lyrics"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                textView.setText("That didn't work!");
-            }
-        });
-
-// Add the request to the RequestQueue.
-        queue.add(stringRequest);
     }
+
+//    public void nyariLirik (){
+//        // Instantiate the RequestQueue.
+//        RequestQueue queue = Volley.newRequestQueue(getActivity());
+//        String url ="https://api.lyrics.ovh/v1/" + mArtistName.getText().toString() + "/" + mSongTitle.getText().toString();
+//
+//        // Request a string response from the provided URL.
+//        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url,null,
+//                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//
+//                        // Display the first 500 characters of the response string.
+//
+//                        try {
+//                            //JSONObject jsonobject = response.getJSONObject("lyrics");
+//                            // Log.i("TAG", "onResponse: "+ jsonobject);
+//                            textView.setText(response.getString("lyrics"));
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                textView.setText("That didn't work!");
+//            }
+//        });
+//
+//// Add the request to the RequestQueue.
+//        queue.add(stringRequest);
+//    }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
