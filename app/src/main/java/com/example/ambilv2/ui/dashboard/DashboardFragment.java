@@ -1,5 +1,6 @@
 package com.example.ambilv2.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,7 +19,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ambilv2.MainActivity;
 import com.example.ambilv2.R;
+import com.example.ambilv2.SearchLyricOutput;
 import com.example.ambilv2.databinding.FragmentDashboardBinding;
 
 import org.json.JSONArray;
@@ -33,7 +37,6 @@ public class DashboardFragment extends Fragment {
 
     private BillboardAdapter adapter;
     private List<Billboard> billboardList;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -58,8 +61,23 @@ public class DashboardFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         setDataBillboard();
-
     }
+
+//    private void mencariLirikFromChart (){
+//
+//        String artis = adapter.onClickArtistName;
+//        String title = adapter.onClickSongName;
+//        if (artis.matches("") || title.matches("")) {
+//            return;
+//        } else {
+//            Intent intent = new Intent(getActivity(), SearchLyricOutput.class);
+//            intent.putExtra(MainActivity.keyArtist, artis);
+//            intent.putExtra(MainActivity.keyTitle, title);
+//            startActivity(intent);
+//        }
+//    }
+
+
 
     @Override
     public void onDestroyView() {

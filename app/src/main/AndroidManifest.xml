@@ -14,7 +14,8 @@
         android:theme="@style/Theme.AmbilV2">
         <activity
             android:name=".SearchLyricOutput"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".SplashScreen"
             android:exported="true"

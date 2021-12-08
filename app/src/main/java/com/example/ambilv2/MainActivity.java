@@ -1,21 +1,8 @@
 package com.example.ambilv2;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -24,9 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.ambilv2.databinding.ActivityMainBinding;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,41 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-//    public void searchLyric(View view) {
-//        Log.i("Nama Artist", "searchLyric: " + mArtistName.getText().toString());
-//        // Instantiate the RequestQueue.
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        String url ="https://api.lyrics.ovh/v1/" + mArtistName.getText().toString() + "/" + mSongTitle.getText().toString();
-//
-//        // Request a string response from the provided URL.
-//        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url,null,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONOAbject response) {
-//
-//                        // Display the first 500 characters of the response string.
-//
-//                        try {
-//                            //JSONObject jsonobject = response.getJSONObject("lyrics");
-//                           // Log.i("TAG", "onResponse: "+ jsonobject);
-//                            textView.setText(response.getString("lyrics"));
-//                        } catch (JSONException e) {
-//                           e.printStackTrace();
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                textView.setText("That didn't work!");
-//            }
-//        });
-//
-//// Add the request to the RequestQueue.
-//        queue.add(stringRequest);
-//    }
-
 
 
 }

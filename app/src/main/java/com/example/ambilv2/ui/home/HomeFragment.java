@@ -61,41 +61,8 @@ public class HomeFragment extends Fragment {
             intent.putExtra(keyTitle, title);
             startActivity(intent);
         }
-
-
     }
 
-//    public void nyariLirik (){
-//        // Instantiate the RequestQueue.
-//        RequestQueue queue = Volley.newRequestQueue(getActivity());
-//        String url ="https://api.lyrics.ovh/v1/" + mArtistName.getText().toString() + "/" + mSongTitle.getText().toString();
-//
-//        // Request a string response from the provided URL.
-//        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url,null,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//
-//                        // Display the first 500 characters of the response string.
-//
-//                        try {
-//                            //JSONObject jsonobject = response.getJSONObject("lyrics");
-//                            // Log.i("TAG", "onResponse: "+ jsonobject);
-//                            textView.setText(response.getString("lyrics"));
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                textView.setText("That didn't work!");
-//            }
-//        });
-//
-//// Add the request to the RequestQueue.
-//        queue.add(stringRequest);
-//    }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =

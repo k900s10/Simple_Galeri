@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardViewId"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp">
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="#E9E9EA"
+    app:cardCornerRadius="10dp"
+    app:cardPreventCornerOverlap="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +22,6 @@
             android:layout_marginStart="15dp"
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="1"
             android:textSize="21sp"
             android:layout_centerVertical="true"
             android:textStyle="bold" />
@@ -28,7 +33,6 @@
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@id/lRank"
             android:fontFamily="@font/poppins_bold"
-            android:text="Little Box"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -40,8 +44,7 @@
             android:textSize="15sp"
             android:layout_marginBottom="5dp"
             android:layout_toEndOf="@id/lRank"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Randy Orton" />
+            android:fontFamily="@font/poppins_medium" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

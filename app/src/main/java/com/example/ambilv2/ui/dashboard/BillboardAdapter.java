@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ambilv2.MainActivity;
 import com.example.ambilv2.R;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 public class BillboardAdapter extends RecyclerView.Adapter<BillboardAdapter.ViewHolder> {
     private List<Billboard> billboardList;
     private Context context;
+
 
     public BillboardAdapter(Context context, List<Billboard> billboardList) {
         this.context = context;
@@ -39,6 +41,7 @@ public class BillboardAdapter extends RecyclerView.Adapter<BillboardAdapter.View
         holder.mArtist.setText(billboard.getArtist());
     }
 
+
     @Override
     public int getItemCount() {
         Log.i("BillboardAdapter", "getItemCount: " + billboardList.size());
@@ -48,6 +51,8 @@ public class BillboardAdapter extends RecyclerView.Adapter<BillboardAdapter.View
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView mRank, mTitle, mArtist;
         BillboardAdapter billboardAdapter;
+        String onClickArtistName, onClickSongName;
+        int position;
 
         public ViewHolder(@NonNull View itemView, BillboardAdapter billboardAdapter) {
             super(itemView);
@@ -56,6 +61,19 @@ public class BillboardAdapter extends RecyclerView.Adapter<BillboardAdapter.View
             this.mTitle = itemView.findViewById(R.id.lTitle);
             this.mArtist = itemView.findViewById(R.id.lArtist);
             this.billboardAdapter = billboardAdapter;
+
+            this.position = getAdapterPosition();
+            itemView.setOnClickListener(view -> {
+                int pos = getAdapterPosition();
+
+                if (pos != RecyclerView.NO_POSITION) {
+                    Billboard clickedDataItem = billboardAdapter.billboardList.get(pos);
+                    onClickArtistName = clickedDataItem.getArtist();
+                    onClickSongName = clickedDataItem.getTitle();
+//                    Log.i("getDataById", "id: " + clickedDataItem.toString() + ", data: " + test);
+                }
+            });
         }
+
     }
 }
